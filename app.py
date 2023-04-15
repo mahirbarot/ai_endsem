@@ -85,6 +85,6 @@ model=st.selectbox("Choose a model for prediction...",('Linear','Bayesian','Lass
 
 if st.button("Predict the price"):   
         output = predict_price(LotArea,MasVnrArea,TotalBsmtSF,f1stFlrSF,GrLivArea,GarageArea,model)
-        st.success('The price is ${}'.format(price))
+        st.success('Property price after 7yrs: "${}" at 5.1% annual growth '.format(round(price+(7*(5*price/100))),2))#price + 7yr x 5% of price
         st.write("")
         st.write("")
