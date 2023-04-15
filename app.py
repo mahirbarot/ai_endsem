@@ -79,7 +79,8 @@ GrLivArea=st.slider('Select Ground Living Area', int(data['GrLivArea'].min()), i
 GarageArea=st.slider('Select GarageArea', int(data['GarageArea'].min()), int(data['GarageArea'].max()), value=int(data['GarageArea'].mean()))
 
 
-model=st.selectbox("Choose a model for prediction...",('Linear','Bayesian','Lasso','Ridge','RandomForest','ElasticNet'))
+#model=st.selectbox("Choose a model for prediction...",('Linear','Bayesian','Lasso','Ridge','RandomForest','ElasticNet'))
+model=st.selectbox("Choose a model for prediction...",('Linear','Bayesian','Lasso','Ridge','RandomForest','ElasticNet'),index=4)
 
 
 
