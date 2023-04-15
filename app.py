@@ -11,13 +11,14 @@ st.set_page_config(
 data=pd.read_csv('data.csv')
 data.head()
 st.title("A Cute House price predicator app")
+st.write("Project by CSE dept: Purva, Mahir, Megha")
 if st.button("Make happen a snow fall:)"): 
         st.snow()
 st.write("")
 st.write("")
 st.write("")
 st.write("Hi, this is dataframe from our dataset...")
-st.write("Project by CSE dept: Purva, Mahir, Megha")
+
          
 st.write(data.head())
 st.write("")
