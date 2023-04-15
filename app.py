@@ -18,12 +18,14 @@ st.write("")
 st.write("")
 st.header("ML Models used with respective accuracy:")
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3 = st.columns(3)
+col4, col5, col6 =st.columns(3)
 col1.metric("Accuracy", "OLS", "77.23")
 col2.metric("Accuracy", "Lasso", "77.33")
 col3.metric("Accuracy", "Ridge", "77.23")
 col4.metric("Accuracy", "EN", "77.12")
-col5.metric("Accuracy", "Bayesian", "-77.13")
+col5.metric("Accuracy", "Bayesian", "77.13")
+col6.metric("Accuracy", "RandomForest", "80.98")
 st.write("")
 st.write("")
 st.write("")
@@ -35,9 +37,22 @@ st.area_chart(data,x='LotArea',y='SalePrice')
 #['LotArea', 'MasVnrArea', 'TotalBsmtSF', '1stFlrSF', 'GrLivArea','GarageArea', 'SalePrice']
 d_lotarea=int(data['LotArea'].mean())
 
-def predict_price(LotArea,MasVnrArea,TotalBsmtSF,f1stFlrSF,GrLivArea,GarageArea):
-
-        model=pickle.load(open('ols2.pickle','rb'))
+def predict_price(LotArea,MasVnrArea,TotalBsmtSF,f1stFlrSF,GrLivArea,GarageArea,model_name):
+        #'Linear','Bayesian','Lasso','Ridge','RandomForest','ElasticNet'
+        if(model_name == 'Linear'):
+                model=pickle.load(open('ols2.pickle','rb'))
+        elif(model_name == 'Bayesian'):
+                model=pickle.load(open('bayesian.pickle','rb'))
+        elif(model_name == 'Lasso'):
+                model=pickle.load(open('lasso.pickle','rb'))
+        elif(model_name == 'Ridge'):
+                model=pickle.load(open('ridge.pickle','rb'))
+        elif(model_name == 'RandomForest'):
+                model=pickle.load(open('rf.pickle','rb'))
+        elif(model_name == 'ElasticNet'):
+                model=pickle.load(open('en.pickle','rb'))
+        
+        #model=pickle.load(open('ols2.pickle','rb'))
         ans=model.predict([[LotArea,MasVnrArea,TotalBsmtSF,f1stFlrSF,GrLivArea,GarageArea]])
         st.write("")
         st.subheader("Processing inputs...")
@@ -64,8 +79,12 @@ GrLivArea=st.slider('Select Ground Living Area', int(data['GrLivArea'].min()), i
 GarageArea=st.slider('Select GarageArea', int(data['GarageArea'].min()), int(data['GarageArea'].max()), value=int(data['GarageArea'].mean()))
 
 
+model=st.selectbox("Choose a model for prediction...",('Linear','Bayesian','Lasso','Ridge','RandomForest','ElasticNet'))
+
 
 
 if st.button("Predict the price"):   
-        output = predict_price(LotArea,MasVnrArea,TotalBsmtSF,f1stFlrSF,GrLivArea,GarageArea)
+        output = predict_price(LotArea,MasVnrArea,TotalBsmtSF,f1stFlrSF,GrLivArea,GarageArea,model)
         st.success('The price is ${}'.format(price))
+        st.write("")
+        st.write("")
