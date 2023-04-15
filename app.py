@@ -2,6 +2,12 @@ import pandas as pd
 import streamlit as st
 import pickle
 import time
+
+st.set_page_config(
+        page_title="A.I end sem project",
+        page_icon="chart_with_upwards_trend",
+        layout="wide",
+    )
 data=pd.read_csv('data.csv')
 data.head()
 st.title("A Cute House price predicator app")
